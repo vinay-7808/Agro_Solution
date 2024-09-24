@@ -18,7 +18,7 @@ const Header = () => {
                 document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;";
                 document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;";
                 logout(); // Call the logout function from context
-                navigate('/'); // Redirect to home after logout
+                navigate('/login'); // Redirect to home after logout
             }
         } catch (error) {
             console.error('Error logging out:', error);
