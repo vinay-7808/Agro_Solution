@@ -31,9 +31,6 @@ const Body = () => {
                 method: 'POST',
                 body: formData,
                 credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
             });
 
             setIsLoading(false); // Stop loading after the response
