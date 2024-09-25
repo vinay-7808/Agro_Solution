@@ -16,43 +16,41 @@ const Body = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         if (!imageFile) {
             alert('Please select an image file.');
             return;
         }
-
+    
         const formData = new FormData();
-        formData.append('image', imageFile);
-        setIsLoading(true); // Start loading when the request is made
-
+        formData.append('file', imageFile);  // Match this with your backend's expected key ('file' in this case)
+        setIsLoading(true);  // Start loading when the request is made
+    
         try {
             const response = await fetch('https://algo-solution.onrender.com/api/v1/predict', {
                 method: 'POST',
                 body: formData,
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                credentials: 'include',  // Include cookies for authentication
+                // No need to set 'Content-Type' here, FormData will handle it
             });
-
-            setIsLoading(false); // Stop loading after the response
-
-            const text = await response.text(); // Log the raw response text
-
+    
+            setIsLoading(false);  // Stop loading after the response
+    
+            const text = await response.text();  // Log the raw response text
+    
             if (!response.ok) {
                 // Redirect to login page if unauthorized
                 navigate('/login');
                 return;
             }
-
-            const data = JSON.parse(text); // Parse response as JSON
-
-            const { disease, confidence } = data.data.data;
-
-            setPredictionResult({ disease, confidence }); // Store class and confidence
+    
+            const data = JSON.parse(text);  // Parse response as JSON
+    
+            const { disease, confidence } = data;  // Assuming the response contains { disease, confidence }
+    
+            setPredictionResult({ disease, confidence });  // Store class and confidence
         } catch (error) {
-            setIsLoading(false); // Stop loading if there's an error
+            setIsLoading(false);  // Stop loading if there's an error
             console.error('Error uploading file:', error);
             alert('Error uploading file: ' + error.message);
         }
