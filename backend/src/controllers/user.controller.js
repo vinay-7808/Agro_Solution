@@ -121,9 +121,11 @@ const loginUser = asyncHandler( async (req, res) => {
     select("-password -refreshToken")
 
     const options = {
-        httpOnly: true,
-        secure: true
-    } // now the cookie can be modified by server only
+        httpOnly: true,   // Ensure the cookie is inaccessible to JavaScript
+        secure: true,     // Only send cookies over HTTPS
+        sameSite: 'None', // Required for cross-origin cookie transmission
+        maxAge: 24 * 60 * 60 * 1000  // Cookie expiration time
+    };
 
     return res
     .status(200)
