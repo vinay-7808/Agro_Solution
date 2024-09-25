@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../Auth'; // Import useAuth
+import { useAuth } from '../../Auth';
 
 const Header = () => {
     const { isLoggedIn, logout } = useAuth();
@@ -10,7 +10,7 @@ const Header = () => {
         try {
             const response = await fetch('https://algo-solution.onrender.com/api/v1/users/logout', {
                 method: 'POST',
-                credentials: 'include',  // Ensure cookies are included
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -28,8 +28,8 @@ const Header = () => {
     };
 
     return (
-        <header className="w-full bg-purple-600 text-white p-4 shadow-md">
-            <div className="flex justify-between items-center max-w-6xl mx-auto">
+        <header className="w-full h-16 bg-purple-600 text-white p-4 shadow-md">
+            <div className="flex justify-between items-center mx-auto">
                 <Link to="/" className="text-lg font-bold">AlgoSolutions</Link>
                 <nav>
                     {isLoggedIn ? (

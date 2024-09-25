@@ -63,7 +63,7 @@ const Body = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 flex flex-col items-center justify-center p-4">
+        <div className="min-h-screen flex-grow bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 flex flex-col items-center justify-center p-4">
             {!predictionResult ? (
                 <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
                     <h2 className="text-3xl font-bold mb-6 text-center text-purple-700">Upload Image for Prediction</h2>
@@ -79,7 +79,6 @@ const Body = () => {
                             />
                         </div>
                         
-                        {/* Show image preview when image is selected */}
                         {imagePreview && (
                             <div className="mb-6">
                                 <img
@@ -100,7 +99,6 @@ const Body = () => {
                 </div>
             ) : (
                 <div className="mt-6 bg-white p-8 rounded-lg shadow-lg w-full max-w-lg text-center">
-                    {/* Show the uploaded image above the prediction result */}
                     {imagePreview && (
                         <div className="mb-6">
                             <img
