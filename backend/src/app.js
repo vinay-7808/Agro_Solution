@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://algo-solution-frontend.onrender.com',
     credentials: true
 })) // middleware to allow requests from these origin
 
