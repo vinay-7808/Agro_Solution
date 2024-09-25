@@ -27,7 +27,7 @@ const Body = () => {
         setIsLoading(true); // Start loading when the request is made
 
         try {
-            const response = await fetch('http://localhost:8000/api/v1/predict', {
+            const response = await fetch('https://algo-solution.onrender.com/api/v1/predict', {
                 method: 'POST',
                 body: formData,
                 credentials: 'include',

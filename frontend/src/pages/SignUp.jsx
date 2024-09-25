@@ -32,7 +32,7 @@ const SignUp = () => {
                 formData.append('profilePhoto', profilePic);
             }
 
-            const response = await fetch('http://localhost:8000/api/v1/users/register', {
+            const response = await fetch('https://algo-solution.onrender.com/api/v1/users/register', {
                 method: 'POST',
                 body: formData,
             });
