@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Auth'; // Import useAuth
 
 const Header = () => {
-    const { isLoggedIn, logout } = useAuth(); // Access isLoggedIn and logout from context
+    const { isLoggedIn, logout } = useAuth();
     const navigate = useNavigate();
 
     const handleLogout = async () => {
@@ -17,9 +17,8 @@ const Header = () => {
             });
     
             if (response.ok) {
-                // Backend handles clearing cookies, frontend handles state and redirection
-                logout(); // Call the logout function from context to update the state and localStorage
-                navigate('/login'); // Redirect to login page after successful logout
+                logout();
+                navigate('/login');
             } else {
                 console.error('Failed to log out:', response.status);
             }
@@ -29,21 +28,33 @@ const Header = () => {
     };
 
     return (
-        <header className="flex justify-between items-center p-4 bg-purple-600 text-white">
-            <Link to="/" className="text-lg font-bold">AlgoSolutions</Link> {/* Make title clickable */}
-            <nav>
-                {isLoggedIn ? (
-                    <div className="flex items-center">
-                        <Link to="/profile" className="mr-4">My Profile</Link>
-                        <button onClick={handleLogout} className="bg-red-600 px-4 py-2 rounded">Logout</button>
-                    </div>
-                ) : (
-                    <div className="flex items-center">
-                        <Link to="/login" className="mr-4">Login</Link>
-                        <Link to="/signup" className="bg-blue-600 px-4 py-2 rounded">Sign Up</Link>
-                    </div>
-                )}
-            </nav>
+        <header className="w-full bg-purple-600 text-white p-4 shadow-md">
+            <div className="flex justify-between items-center max-w-6xl mx-auto">
+                <Link to="/" className="text-lg font-bold">AlgoSolutions</Link>
+                <nav>
+                    {isLoggedIn ? (
+                        <div className="flex items-center">
+                            <Link to="/profile" className="mr-4">My Profile</Link>
+                            <button 
+                                onClick={handleLogout} 
+                                className="bg-red-600 px-4 py-2 rounded hover:bg-red-700 transition duration-300"
+                            >
+                                Logout
+                            </button>
+                        </div>
+                    ) : (
+                        <div className="flex items-center">
+                            <Link to="/login" className="mr-4">Login</Link>
+                            <Link 
+                                to="/signup" 
+                                className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 transition duration-300"
+                            >
+                                Sign Up
+                            </Link>
+                        </div>
+                    )}
+                </nav>
+            </div>
         </header>
     );
 };
