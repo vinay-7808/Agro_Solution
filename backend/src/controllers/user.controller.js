@@ -121,9 +121,11 @@ const loginUser = asyncHandler( async (req, res) => {
     select("-password -refreshToken")
 
     const options = {
-        httpOnly: true,
-        secure: true
-    } // now the cookie can be modified by server only
+        httpOnly: true,   // Ensure the cookie is inaccessible to JavaScript
+        secure: true,     // Only send cookies over HTTPS
+        sameSite: 'None', // Required for cross-origin cookie transmission
+        maxAge: 24 * 60 * 60 * 1000  // Cookie expiration time
+    };
 
     return res
     .status(200)
@@ -137,24 +139,24 @@ const logoutUser = asyncHandler( async (req, res) => {
         req.user._id,
         {
             $unset: {
-                refreshToken: 1 // this removes the field from document
+                refreshToken: 1 // This removes the field from the document
             }
         },
         {
             new: true
         }
-    )
+    );
     const options = {
         httpOnly: true,
         secure: true,
         sameSite: 'None'
-    } 
+    };
     return res
-    .status(200)
-    .clearCookie("accessToken", options)
-    .clearCookie("refreshToken", options)
-    .json(new ApiResponse(200, {}, "User logged out"))
-})
+        .status(200)
+        .clearCookie("accessToken", options)  // Clear the accessToken cookie
+        .clearCookie("refreshToken", options) // Clear the refreshToken cookie
+        .json(new ApiResponse(200, {}, "User logged out successfully"));
+});
 
 const refreshAccessToken = asyncHandler( async (req, res) => {
     const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken

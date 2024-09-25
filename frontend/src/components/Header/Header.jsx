@@ -11,17 +11,18 @@ const Header = () => {
         try {
             const response = await fetch('https://algo-solution.onrender.com/api/v1/users/logout', {
                 method: 'POST',
-                credentials: 'include',
+                credentials: 'include',  // Ensure cookies are included
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-
+    
             if (response.ok) {
-                document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;";
-                document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;";
-                logout(); // Call the logout function from context
-                navigate('/login'); // Redirect to home after logout
+                // Let the backend handle cookie clearing
+                logout(); // Call the logout function from context to update the state
+                navigate('/login'); // Redirect to login page after successful logout
+            } else {
+                console.error('Failed to log out:', response.status);
             }
         } catch (error) {
             console.error('Error logging out:', error);
