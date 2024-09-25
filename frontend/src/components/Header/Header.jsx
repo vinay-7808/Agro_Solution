@@ -1,4 +1,3 @@
-// src/Header.jsx
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Auth'; // Import useAuth
@@ -18,8 +17,8 @@ const Header = () => {
             });
     
             if (response.ok) {
-                // Let the backend handle cookie clearing
-                logout(); // Call the logout function from context to update the state
+                // Backend handles clearing cookies, frontend handles state and redirection
+                logout(); // Call the logout function from context to update the state and localStorage
                 navigate('/login'); // Redirect to login page after successful logout
             } else {
                 console.error('Failed to log out:', response.status);
