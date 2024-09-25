@@ -19,7 +19,7 @@ const getPrediction = asyncHandler(async (req, res) => {
     formData.append('file', new Blob([imageFile], { type: 'image/jpeg' }), 'image.jpg'); // Adjust the MIME type as necessary
 
     try {
-        const response = await fetch('http://localhost:3000/', {
+        const response = await fetch(process.env.MODEL_LINK, {
             method: 'POST',
             body: formData,
         });
