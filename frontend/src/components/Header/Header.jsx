@@ -12,6 +12,9 @@ const Header = () => {
             const response = await fetch('https://algo-solution.onrender.com/api/v1/users/logout', {
                 method: 'POST',
                 credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
 
             if (response.ok) {
