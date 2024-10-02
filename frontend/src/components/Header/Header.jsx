@@ -30,7 +30,7 @@ const Header = () => {
     return (
         <header className="w-full h-16 bg-purple-600 text-white p-4 shadow-md">
             <div className="flex justify-between items-center mx-auto">
-                <Link to="/" className="text-lg font-bold">AlgoSolutions</Link>
+                <Link to="/" className="text-lg font-bold">AgroSolutions</Link>
                 <nav>
                     {isLoggedIn ? (
                         <div className="flex items-center">
